@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Centered Yellow Site</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffdd00;
+      color: #000000;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #ffdd00;
+      color: #000000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav.scrolled {
+      background-color: #000000;
+      color: #ffdd00;
+    }
+
+    nav.scrolled .logo,
+    nav.scrolled a {
+      color: #ffdd00;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-family: 'Pirata One', cursive;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .centered-content {
+      height: 200vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: 'Pirata One', cursive;
+      padding-top: 80px;
+    }
+
+    .centered-content h1 {
+      font-size: 180px;
+      line-height: 1;
+    }
+
+    .centered-content h2 {
+      font-size: 250px;
+      line-height: 1;
+      margin-top: -1vw;
+    }
+
+    .centered-content p {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      font-family: Arial, sans-serif;
+    }
+
+    .split-section {
+      display: flex;
+      flex-wrap: nowrap;
+      background-color: #fff;
+      color: #000000;
+      height: 100vh;
+    }
+
+    .split-left,
+    .split-right {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .split-left {
+      padding: 2rem;
+      font-size: 80px;
+      font-family: 'Times New Roman', Times, serif;
+      text-align: left;
+      justify-content: flex-start;
+    }
+
+    .split-right img#bwimg1 {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .projects-section {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      background-color: #000;
+      color: #ffdd00;
+    }
+
+    .projects-list {
+      width: 60%;
+      padding: 5rem 2rem;
+    }
+
+    .projects-title {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: bolder;
+      font-size: 5rem;
+      margin-bottom: 3rem;
+      margin-left: 50px;
+    }
+
+    .projects-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  margin: 0 50px;
+  position: relative;
+  overflow: visible; /* Allow scaled elements to extend outside */
+}
+
+.project-name {
+  font-family: 'Pirata One', cursive;
+  font-size: 2rem;
+  color: #ffdd00;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  transform-origin: left center; /* Makes it scale towards the right */
+  position: relative;
+  z-index: 1;
+}
+
+.project-name:hover {
+  transform: scale(2); /* Scale 2x towards the right */
+  z-index: 10;
+}
+
+
+    /* Right-side info panel */
+    .project-info-panel {
+      width: 60%;
+      padding: 3rem;
+      border-left: 2px solid #ffdd00;
+      background-color: #000;
+      color: #ffdd00;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-info-panel img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      margin-top: 1rem;
+      filter: grayscale(100%);
+    }
+
+    .project-info-panel strong {
+      font-family: 'Pirata One', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-info-panel p {
+      font-size: 1.2rem;
+    }
+
+    .view-all-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 50px; /* Align with project grid */
+}
+
+.view-all-button {
+  background-color: #ffdd00;
+  color: #000;
+  font-family: 'Pirata One', cursive;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.view-all-button:hover {
+  background-color: #000;
+  color: #ffdd00;
+}
+
+
+  .ethos-section {
+  background-color: #ffffff;
+  color: #000;
+  padding: 6rem 2rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+.ethos-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ethos-title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-family: 'Pirata One', cursive;
+  color: #000;
+}
+
+.ethos-paragraph {
+  font-size: 1.3rem;
+  line-height: 2;
+  margin-bottom: 1.5rem;
+}
+
+
+.site-footer {
+  background-color: #000;
+  color: #ffdd00;
+  padding: 3rem 2rem;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-top: 1px solid #ffdd00;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-purpose {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.footer-credit {
+  font-size: 0.9rem;
+  color: #ccc000;
+}
+
+/* Scroll reveal animation */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  will-change: transform, opacity;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  text-align: center;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Animation base */
+.split-left {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: transform 1s ease-out, opacity 1s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Triggered when in view */
+.split-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.split-right img {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: transform 1s ease-out, opacity 1s ease-out;
+  will-change: transform, opacity;
+}
+
+.split-right img.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <div class="logo">m.s</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="centered-content">
+  <div class="title-wrapper">
+    <h1>malabar</h1>
+    <h2>Sovereign</h2>
+    <p>Sovereign Standards, Timeless Trust.</p>
+  </div>
+</div>
+
+
+  <section class="split-section">
+    <div class="split-left">
+      <h3>Believe you can and you're halfway there.</h3>
+    </div>
+    <div class="split-right">
+      <img id="bwimg1" src="bwimg.jpg" alt="Elegant Image" />
+    </div>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-list">
+      <h2 class="projects-title">Subsidaries</h2>
+      <div class="projects-grid">
+        <div class="project-name" data-title="rivoa" data-description="Reviving heritage with elegance and power. A celebration of legacy and craft." data-img="rivoa.jpg">rivoa</div>
+        <div class="project-name" data-title="our tower" data-description="Where modern design meets timeless tradition. Minimal and majestic." data-img="tower.jpg">The Sublime Tower</div>
+        <div class="project-name" data-title="have some coffee" data-description="Built with intention. Styled with sovereignty." data-img="coffee.jpg">ground Coffee</div>
+      </div>
+      <div class="view-all-container">
+  <button class="view-all-button" onclick="alert('Redirect to full projects page or load more projects')">
+    View All
+  </button>
+</div>
+
+    </div>
+
+    <div class="project-info-panel" id="infoPanel">
+      <strong id="infoTitle"></strong>
+      <p id="infoDescription"></p>
+      <img id="infoImage" src="" alt="Project Image">
+    </div>
+  </section>
+
+<section class="ethos-section">
+  <div class="ethos-container">
+    <h2 class="ethos-title">Our Ethos</h2>
+    <p class="ethos-paragraph">
+      At Malabar Sovereign, we believe in the enduring power of thoughtful design and deliberate creation. 
+      Every line we draw, every structure we build, and every product we unveil is rooted in a legacy of trust, integrity, and timeless elegance.
+    </p>
+    <p class="ethos-paragraph">
+      We reject the fleeting and embrace the eternal. Our work reflects a balance of heritage and forward vision—designed not for trends, but for time.
+    </p>
+    <p class="ethos-paragraph">
+      Sovereignty, to us, means self-rule in craft. It is the pursuit of excellence without compromise. 
+      We honor our roots while carving a path that is unapologetically distinct.
+    </p>
+    <p class="ethos-paragraph">
+      Malabar Sovereign is not just a name—it’s a standard. A quiet rebellion against mediocrity. A commitment to the exceptional.
+    </p>
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-purpose">
+      Built to last. Designed to define.<br>
+      Malabar Sovereign stands for timeless integrity in every form we create.
+    </p>
+    <p class="footer-credit">© 2025 Malabar Sovereign. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const titleEl = document.getElementById('infoTitle');
+      const descEl = document.getElementById('infoDescription');
+      const imgEl = document.getElementById('infoImage');
+      const names = document.querySelectorAll('.project-name');
+
+      names.forEach(name => {
+        name.addEventListener('mouseenter', () => {
+          titleEl.textContent = name.dataset.title;
+          descEl.textContent = name.dataset.description;
+          imgEl.src = name.dataset.img;
+          imgEl.alt = name.dataset.title;
+        });
+
+        name.addEventListener('mouseleave', () => {
+          titleEl.textContent = '';
+          descEl.textContent = '';
+          imgEl.src = '';
+          imgEl.alt = '';
+        });
+      });
+    // Scroll-triggered reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target); // Reveal once
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+// Target elements for scroll animation
+document.querySelectorAll('.scroll-fade').forEach(el => {
+  observer.observe(el);
+});
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const title = document.querySelector('.title-wrapper');
+
+  // Calculate scale and translate based on scroll
+  const scale = Math.max(1 - scrollY / 1000, 0.5); // limit to 0.5
+  const translateZ = scrollY * 0.5; // simulate "moving away"
+
+  title.style.transform = `translate(-50%, -50%) scale(${scale}) translateZ(-${translateZ}px)`;
+  title.style.opacity = 1 - scrollY / 600; // Optional fade-out effect
+});
+
+// Observer for slide-in text
+const leftObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      leftObserver.unobserve(entry.target); // Animate only once
+    }
+  });
+}, {
+  threshold: 0.3
+});
+
+const splitLeft = document.querySelector('.split-left');
+leftObserver.observe(splitLeft);
+
+const image = document.querySelector('.split-right img');
+leftObserver.observe(image); // Reuse the same observer
+
+
+    });
+  </script>
+
+</body>
+</html>
